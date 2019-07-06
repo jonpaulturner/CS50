@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+    <form action = "/score" method = "post">
+        First Word:<br>
+        <input type = "text" name="string1">
+        <br>
+        Second Word:<br>
+        <input type = "text" name = "string2">
+        <br>
+        <input type = "submit" value = "submit scores" />
+        <!--<button type="submit">Score</button> -->
+    </form>
+
+{% endblock %}

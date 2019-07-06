@@ -1,0 +1,34 @@
+<table class = "table table-bordered">
+   <thead>
+        <tr>
+            <th> </th>
+            <th> </th>
+            {% for letter in s2 %}
+                <th>{{letter}}</th>
+            {% endfor %}
+        </tr>
+        <tr>
+            <th></th>
+            {% for i in range(s2|length+1) %}
+                <td>{{i}}</td>
+            {% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>0</td>
+            {% for i in range(s2|length+1) %}
+                <td>{{i}}</td>
+            {% endfor %}
+        </tr>
+        {% for i in range(1, s1|length+1) %}
+            <tr>
+                <td>{{s1[i-1]}}  {{i}}</td>
+
+                {% for j in range(s2|length+1) %}
+                    <td>{{matrix[i][j][0]}}</td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

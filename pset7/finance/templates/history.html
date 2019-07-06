@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    History
+{% endblock %}
+
+{% block main %}
+
+<table class = "table table-striped table-light" action = "/index">
+    <tr>
+        <th>Stock</th>
+        <th># of Shares</th>
+        <th>Price</th>
+        <th>Bought or Sold</th>
+        <th>Time</th>
+        <th>Date</th>
+    </tr>
+
+    {% for i in history %}
+    <tr>
+        {% filter upper %}
+        <th>{{ i.symbol }}</th>
+        {% endfilter %}
+        <th>{{ i.shares }}</th>
+        <th>${{ i.price | round(2) }}</th>
+        <th>{{ i.boughtsold }}</th>
+        <th>{{ i.time }}</th>
+        <th>{{ i.date }}</th>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}
