@@ -1,0 +1,68 @@
+Open memory card file
+  fopen
+    need to check if function returns null value
+
+Find beginning of JPEG
+    First 3 bytes: 0xff 0xd8 0xff
+    Each block is 512 bytes
+    Stored back to back
+
+Open a new JPEG
+    fread(data, size, number, inptr);
+        data: pointer to struct that contains bytes to be read
+        size: size of each element to read (sizeof)
+        number: number of elements to read
+        inptr: FILE * to read from
+
+        fread(buffer, 512, 1,
+
+    Walk through each block, checking for the first JPEG header
+    Once it's found, start writing blocks to JPEG file until
+        a new JPEG header is found
+
+
+
+Write 512 bytes until new JPEG is found
+    Write these bytes into a buffer
+    if (buffer[0] == 0xff &&
+        buffer[1] == 0xd8 &&
+        buffer[2] == 0xff &&
+        (buffer[3] & 0xf0) == 0xe0)
+
+
+Creating and opening new JPEG files:
+    Keep track of current jpeg file number
+    sprintf(filename, "%03i.jpg", 2);
+        filename: char array to store the resultant string (i.e. 001, 002)
+    FILE *img = fopen(filename, "w");
+
+Write 512 bytes to our new JPEG
+    fwrite(data, size, number, outptr);
+        data: pointer to the struct that contains the bytes you're reading from
+            buffer?
+        size
+        number
+        outptr: FILE * to write to (new image file created above)
+
+Detect end of file
+    Read 512 1 byte blocks in
+    Use a conditional to make sure it returned 512 bytes from fread
+    If not, it's the end of a file
+
+    if number ==512, do jpeg stuff
+    else end file
+
+    ----------------------------------------------------
+
+Open card file
+repeat until end of card
+    read 512 bytes into a buffer
+    start of a new JPEG?
+        yes? Start our very first JPEG, or if we've already found one,
+            close the current file and open a new one
+        no?  See below
+    Already found a JPEG?
+        no? discard those bytes
+        yes? write those bytes to the current file
+close any remaining files
+
